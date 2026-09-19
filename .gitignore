@@ -1,0 +1,28 @@
+# --- gcloud -----------------------------------------------------------------
+# gcloud's config dir is mostly runtime state, not configuration. Ignore all of
+# it, then re-include the few files that are actually worth tracking.
+gcloud/*
+!gcloud/configurations/
+!gcloud/active_config
+
+# Belt and braces: never track credentials, even if the rules above change.
+**/application_default_credentials.json
+**/credentials.db
+**/access_tokens.db
+**/legacy_credentials/
+
+# --- gh ---------------------------------------------------------------------
+# gh writes oauth tokens into hosts.yml. Never track it.
+gh/hosts.yml
+
+# --- home-manager -----------------------------------------------------------
+# ~/.config is a symlink to this repo, so home-manager's activation backups
+# land here. Never track them.
+*.hm-bak
+
+# --- editors / OS -----------------------------------------------------------
+.DS_Store
+
+# --- nix --------------------------------------------------------------------
+result
+result-*

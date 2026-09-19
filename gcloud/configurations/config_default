@@ -1,0 +1,8 @@
+[core]
+account = sphickson@gmail.com
+project = ux-trainer
+
+[compute]
+zone = us-east1-b
+region = us-east1
+
