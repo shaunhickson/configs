@@ -63,6 +63,11 @@
     # Make uv build venvs from the nix interpreter instead of downloading
     # its own CPython.
     UV_PYTHON_PREFERENCE = "only-system";
+
+    # gcloud keeps logs, an 84MB vendored virtualenv and its credentials all
+    # inside its config dir. ~/.config is this repo, so by default that state
+    # lands in git. Point it at ~/.local/state instead.
+    CLOUDSDK_CONFIG = "$HOME/.local/state/gcloud";
   };
 
   fonts.packages = with pkgs; [
