@@ -47,6 +47,10 @@ in
     go
     golangci-lint
 
+    # Replaces nvm, which was pinned to node v18.1.0 (EOL April 2023) and was
+    # never sourced from the shell config -- it only reached PATH by leftover.
+    nodejs
+
     # --- python --------------------------------------------------------------
     # Global interpreter for scripting only. Per-project environments come from
     # uv, which UV_PYTHON_PREFERENCE pins to this interpreter.
