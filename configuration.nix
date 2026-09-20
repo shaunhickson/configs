@@ -32,7 +32,11 @@
 
   homebrew = {
     enable = true;
-    onActivation.cleanup = "zap";
+    # "uninstall" removes apps that are not listed here, so this list stays
+    # authoritative -- but unlike "zap" it does NOT run each cask's zap
+    # stanza, so user data survives. Ran "zap" once to clear years of drift;
+    # keeping it armed only risks losing data to a typo or a commented line.
+    onActivation.cleanup = "uninstall";
     onActivation.autoUpdate = true;
     onActivation.extraFlags = ["--force"];
     onActivation.upgrade = true;
@@ -47,11 +51,10 @@
       # These stay on Homebrew rather than nix.
       "wireshark-app"
 
-      # NOTE: cleanup = "zap" above means removing this line destroys ALL
-      # Docker state on the next activation -- the VM in
-      # ~/Library/Containers/com.docker.docker with every image, volume and
-      # container, plus ~/.docker and the GUI settings. Deliberate trade-off.
       # The CLI comes from nix (docker-client), same split as wireshark.
+      # Removing this line uninstalls Docker.app but leaves the VM in
+      # ~/Library/Containers/com.docker.docker intact -- that is the point of
+      # cleanup = "uninstall" rather than "zap".
       "docker-desktop"
     ];
   };
