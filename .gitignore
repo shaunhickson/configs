@@ -1,32 +1,51 @@
-# --- gcloud -----------------------------------------------------------------
-# gcloud state now lives in ~/.local/state/gcloud via CLOUDSDK_CONFIG, so it
-# should never reappear here. Kept as a guard in case that variable is lost.
-gcloud/
+# ~/.config is a symlink to this repo, so every tool that writes into its
+# config directory writes into git. Rather than chasing each offender after
+# it appears (gcloud, gh, herdr all had to be caught retroactively), this
+# file is an allowlist: ignore everything, then opt in what we actually
+# track. A new tool's state is excluded by default.
+#
+# Adding a file: add a `!` line for it below. For a directory whose contents
+# are all ours, `!/dir/` is enough. For a directory that also collects state,
+# re-ignore its contents and opt in individual files -- see gh/ below.
 
-# Belt and braces: never track credentials, wherever they turn up.
+/*
+!/.gitignore
+
+# --- nix ---------------------------------------------------------------------
+!/flake.nix
+!/flake.lock
+!/configuration.nix
+!/rebuild.sh
+!/home-manager/
+
+# --- XDG app configs ---------------------------------------------------------
+# These live here because ~/.config IS this repo.
+!/starship.toml
+!/ghostty/
+!/nvim/
+!/zsh/
+!/git/
+
+# gh writes oauth tokens into hosts.yml, so opt in only config.yml.
+!/gh/
+/gh/*
+!/gh/config.yml
+
+# --- overrides ---------------------------------------------------------------
+# Listed last so they win over any opt-in above.
+
+# Credentials, wherever they turn up.
 **/application_default_credentials.json
 **/credentials.db
 **/access_tokens.db
 **/legacy_credentials/
+**/*.pem
+**/*.key
 
-# --- gh ---------------------------------------------------------------------
-# gh writes oauth tokens into hosts.yml. Never track it.
-gh/hosts.yml
-
-# --- tool state under ~/.config ---------------------------------------------
-# ~/.config is a symlink to this repo, so anything that writes state into its
-# config dir writes into git. Add offenders here as they appear.
-herdr/
-pi/
-
-# --- home-manager -----------------------------------------------------------
-# ~/.config is a symlink to this repo, so home-manager's activation backups
-# land here. Never track them.
+# home-manager activation backups.
 *.hm-bak
 
-# --- editors / OS -----------------------------------------------------------
+# macOS / nix build output.
 .DS_Store
-
-# --- nix --------------------------------------------------------------------
 result
 result-*
