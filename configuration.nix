@@ -1,10 +1,21 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   #Determinate-managed nix
   nix.enable = false;
 
   nixpkgs.config.allowUnfree = true;
+
+  # Exposes the newer nixpkgs as `pkgs.unstable.<name>`, so a single package
+  # can run ahead of the 26.05 pin without moving anything else.
+  nixpkgs.overlays = [
+    (final: prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        inherit (prev.stdenv.hostPlatform) system;
+        config.allowUnfree = true;
+      };
+    })
+  ];
   nixpkgs.hostPlatform = "aarch64-darwin";
   
   system.primaryUser = "sph";

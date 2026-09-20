@@ -82,6 +82,9 @@ in
     wireshark-cli # tshark/dumpcap; the GUI stays a cask (needs ChmodBPF)
 
     # --- misc --------------------------------------------------------------
+    # Not in nixpkgs 26.05 yet, so taken from the unstable overlay.
+    unstable.herdr
+
     gemini-cli
     nethack
   ];
