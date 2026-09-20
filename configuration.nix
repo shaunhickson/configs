@@ -99,6 +99,11 @@
     useUserPackages = true;
     # Existing dotfiles get moved aside instead of failing the activation.
     backupFileExtension = "hm-bak";
-    users.sph = import ./home-manager/home.nix;
+    # A flake input only declares where the module comes from -- it still has
+    # to be imported before its options (here programs.pi) exist.
+    users.sph.imports = [
+      ./home-manager/home.nix
+      inputs.nixpi.homeModules.pi
+    ];
   };
 }

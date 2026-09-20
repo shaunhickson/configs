@@ -13,6 +13,12 @@ gcloud/
 # gh writes oauth tokens into hosts.yml. Never track it.
 gh/hosts.yml
 
+# --- tool state under ~/.config ---------------------------------------------
+# ~/.config is a symlink to this repo, so anything that writes state into its
+# config dir writes into git. Add offenders here as they appear.
+herdr/
+pi/
+
 # --- home-manager -----------------------------------------------------------
 # ~/.config is a symlink to this repo, so home-manager's activation backups
 # land here. Never track them.

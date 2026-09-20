@@ -197,6 +197,10 @@ in
     # at the repo root; it IS ~/.config/starship.toml.
   };
 
+  programs.pi = {
+    enable = true;
+  };
+
   # NOTE: ~/.config is a symlink to this repo, so everything under it --
   # ghostty/, gh/, nvim/, gcloud/ -- is ALREADY in place and needs no linking.
   # An xdg.configFile entry here would make the repo file a symlink pointing

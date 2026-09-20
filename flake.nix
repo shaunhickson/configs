@@ -16,9 +16,11 @@
 
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixpi.url = "github:mateusdcc/nixpi";
   };
   
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nixpkgs-unstable, nix-homebrew, home-manager }: {
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nixpkgs-unstable, nix-homebrew, home-manager, nixpi }: {
     darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
       # Makes `inputs` available to every module, so configuration.nix can
       # reach nixpkgs-unstable.
