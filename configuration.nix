@@ -46,6 +46,13 @@
       # GUI apps that install privileged helpers / system extensions.
       # These stay on Homebrew rather than nix.
       "wireshark-app"
+
+      # NOTE: cleanup = "zap" above means removing this line destroys ALL
+      # Docker state on the next activation -- the VM in
+      # ~/Library/Containers/com.docker.docker with every image, volume and
+      # container, plus ~/.docker and the GUI settings. Deliberate trade-off.
+      # The CLI comes from nix (docker-client), same split as wireshark.
+      "docker-desktop"
     ];
   };
 
