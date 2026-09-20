@@ -109,7 +109,9 @@ in
 
     oh-my-zsh = {
       enable = true;
-      theme = "robbyrussell";
+      # Empty: starship owns the prompt. Setting a theme here as well means
+      # both install a prompt hook and whichever loads last wins.
+      theme = "";
       # Keep this list short -- each plugin is sourced on every shell start.
       plugins = [ "git" "docker" "kubectl" ];
     };
@@ -181,6 +183,15 @@ in
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
+  };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    # Deliberately no `settings`. That option writes a generated starship.toml
+    # to xdg.configHome -- which is this repo -- leaving a /nix/store symlink
+    # committed alongside the source. To customise, hand-write starship.toml
+    # at the repo root; it IS ~/.config/starship.toml.
   };
 
   # NOTE: ~/.config is a symlink to this repo, so everything under it --
