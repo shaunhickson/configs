@@ -67,6 +67,11 @@
       # ~/Library/Containers/com.docker.docker intact -- that is the point of
       # cleanup = "uninstall" rather than "zap".
       "docker-desktop"
+
+      # Documents live in Dropbox so they are not tied to a machine, the same
+      # way config lives in this repo. Was a manual install, so zap never
+      # touched it; managed here now.
+      "dropbox"
     ];
   };
 
