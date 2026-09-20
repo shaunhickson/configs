@@ -1,3 +1,5 @@
+require('vim_config')
+
 -- Neovim configuration.
 --
 -- Hand-managed. ~/.config is a symlink to this repo, so this file IS

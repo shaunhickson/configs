@@ -1,21 +1,4 @@
-font-family = "Hack Nerd Font Mono"
-font-size = 14
-theme = Catppuccin Mocha
-window-padding-x = 10
-window-padding-y = 10
-macos-titlebar-style = transparent
-shell-integration = zsh
-shell-integration-features = cursor,sudo,no-title
-keybind = cmd+1=goto_tab:1
-keybind = cmd+2=goto_tab:2
-keybind = cmd+3=goto_tab:3
-command = /bin/zsh -l
 # This is the configuration file for Ghostty.
-#
-# This template file has been automatically created at the following
-# path since Ghostty couldn't find any existing config files on your system:
-#
-#   /Users/sph/Library/Application Support/com.mitchellh.ghostty/config
 #
 # The template does not set any default options, since Ghostty ships
 # with sensible defaults for all options. Users should only need to set
@@ -63,7 +46,7 @@ command = /bin/zsh -l
 # Use the font we installed earlier.
 # If you didn't install one, Ghostty actually ships with "JetBrains Mono" built-in!
 font-family = "Hack Nerd Font Mono"
-font-size = 14
+font-size = 15
 
 # --- THEME ---
 # Ghostty has huge built-in theme support.
@@ -76,6 +59,10 @@ window-padding-x = 10
 window-padding-y = 10
 window-decoration = true
 macos-titlebar-style = transparent
+background-opacity = 0.8
+background-blur = 20
+window-show-tab-bar = auto
+macos-titlebar-style = transparent 
 
 # --- SHELL INTEGRATION ---
 # This is the "Killer Feature".
