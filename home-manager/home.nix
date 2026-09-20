@@ -133,7 +133,7 @@ in
 
       # .zshrc is generated now, so point these at the files you can edit.
       zconf = "$EDITOR ~/.config/zsh/local.zsh";
-      nixconf = "$EDITOR ~/.config/home-manager/home.nix";
+      nixconf = "$EDITOR ~/.configs/home-manager/home.nix";
       zreload = "exec zsh";
     };
 
@@ -176,8 +176,8 @@ in
       (lib.mkAfter ''
         setopt HIST_VERIFY
 
-        # Machine-local and experimental tweaks. ~/.config is this repo, so
-        # this file is zsh/local.zsh -- edit it and reload, no rebuild.
+        # Machine-local and experimental tweaks. Linked from zsh/local.zsh
+        # in the repo -- edit it and reload, no rebuild.
         [[ -f "$HOME/.config/zsh/local.zsh" ]] && source "$HOME/.config/zsh/local.zsh"
       '')
     ];
@@ -191,19 +191,33 @@ in
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    # Deliberately no `settings`. That option writes a generated starship.toml
-    # to xdg.configHome -- which is this repo -- leaving a /nix/store symlink
-    # committed alongside the source. To customise, hand-write starship.toml
-    # at the repo root; it IS ~/.config/starship.toml.
+    # Deliberately no `settings`: that option generates starship.toml from
+    # nix, which would fight the hand-written one linked below. Edit
+    # starship.toml in the repo instead -- it takes effect without a rebuild.
   };
 
   programs.pi = {
     enable = true;
   };
 
-  # NOTE: ~/.config is a symlink to this repo, so everything under it --
-  # ghostty/, gh/, nvim/, gcloud/ -- is ALREADY in place and needs no linking.
-  # An xdg.configFile entry here would make the repo file a symlink pointing
-  # back at itself through ~/.configs, i.e. a symlink loop ("Too many levels of
-  # symbolic links"). Only files outside ~/.config belong above.
+  # --- XDG config ----------------------------------------------------------
+  # ~/.config is an ordinary directory; these link individual files out of the
+  # repo. mkOutOfStoreSymlink points at the working tree rather than the nix
+  # store, so edits take effect on save with no rebuild.
+  #
+  # Anything NOT listed here -- tool state, caches, credentials -- stays a real
+  # file in ~/.config and never touches git.
+  xdg.configFile = {
+    "starship.toml".source = link "starship.toml";
+    "ghostty/config".source = link "ghostty/config";
+    "zsh/local.zsh".source = link "zsh/local.zsh";
+    "git/ignore".source = link "git/ignore";
+
+    # Whole directory, so a lua/ tree is picked up without listing each file.
+    "nvim".source = link "nvim";
+
+    # config.yml only. gh writes oauth tokens into hosts.yml, which must stay
+    # a real writable file outside the repo.
+    "gh/config.yml".source = link "gh/config.yml";
+  };
 }

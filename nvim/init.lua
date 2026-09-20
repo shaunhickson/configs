@@ -2,9 +2,8 @@ require('vim_config')
 
 -- Neovim configuration.
 --
--- Hand-managed. ~/.config is a symlink to this repo, so this file IS
--- ~/.config/nvim/init.lua -- edits take effect immediately, and home-manager
--- does not need to link it.
+-- Hand-managed. home-manager links ~/.config/nvim at this directory, so edits
+-- here take effect immediately -- no rebuild needed.
 
 -- Disable language providers we don't use. Without this nvim shells out
 -- looking for node/perl/ruby/python hosts on startup. (home-manager's

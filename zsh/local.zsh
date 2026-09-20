@@ -1,7 +1,7 @@
 # Machine-local zsh tweaks.
 #
-# Sourced last by the generated ~/.zshrc. ~/.config is this repo, so this file
-# is ~/.config/zsh/local.zsh -- edit it and `exec zsh`, no rebuild needed.
+# Sourced last by the generated ~/.zshrc, which home-manager links to this
+# file -- edit it and `exec zsh`, no rebuild needed.
 #
 # Anything here that proves permanent should graduate into programs.zsh in
 # home-manager/home.nix.

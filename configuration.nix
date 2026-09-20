@@ -84,8 +84,8 @@
     UV_PYTHON_PREFERENCE = "only-system";
 
     # gcloud keeps logs, an 84MB vendored virtualenv and its credentials all
-    # inside its config dir. ~/.config is this repo, so by default that state
-    # lands in git. Point it at ~/.local/state instead.
+    # inside its config dir. Keep that out of ~/.config entirely by pointing
+    # it at ~/.local/state.
     CLOUDSDK_CONFIG = "$HOME/.local/state/gcloud";
   };
 

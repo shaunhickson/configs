@@ -1,8 +1,8 @@
-# ~/.config is a symlink to this repo, so every tool that writes into its
-# config directory writes into git. Rather than chasing each offender after
-# it appears (gcloud, gh, herdr all had to be caught retroactively), this
-# file is an allowlist: ignore everything, then opt in what we actually
-# track. A new tool's state is excluded by default.
+# An allowlist: ignore everything, then opt in what we actually track, so a
+# new tool's files are excluded by default rather than caught retroactively
+# (gcloud, gh and herdr all had to be). ~/.config is now an ordinary
+# directory with individual files linked in, so this is a safety net rather
+# than the primary defence -- but keep it that way.
 #
 # Adding a file: add a `!` line for it below. For a directory whose contents
 # are all ours, `!/dir/` is enough. For a directory that also collects state,
@@ -10,6 +10,7 @@
 
 /*
 !/.gitignore
+!/README.md
 
 # --- nix ---------------------------------------------------------------------
 !/flake.nix
@@ -19,7 +20,7 @@
 !/home-manager/
 
 # --- XDG app configs ---------------------------------------------------------
-# These live here because ~/.config IS this repo.
+# Linked into ~/.config by home-manager.
 !/starship.toml
 !/ghostty/
 !/nvim/
