@@ -49,13 +49,6 @@
     ];
   };
 
-  # /etc/profiles/per-user/$USER is a buildEnv restricted to pathsToLink, which
-  # by default covers /share/zsh but nothing else zsh-related. nixpkgs installs
-  # zsh-autosuggestions under share/zsh/plugins/ (so it survives) but
-  # zsh-syntax-highlighting under share/zsh-syntax-highlighting/, which was
-  # being silently dropped from the profile.
-  environment.pathsToLink = [ "/share/zsh-syntax-highlighting" ];
-
   # set-environment is sourced by /etc/zshenv, so this reaches every shell.
   # home-manager's home.sessionVariables would NOT: nix-darwin does not source
   # hm-session-vars.sh, and zsh here is not managed by programs.zsh.
